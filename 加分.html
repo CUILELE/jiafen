@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			#box{
+				width: 500px;
+				height: 30px;
+				border: 1px solid black;
+				margin: 300px auto;
+				position: relative;
+			}
+			.active{
+				width: 2%;
+				height: 30px;
+				background: red;
+				position: absolute;
+				left: 0;
+				top: 0;
+			}
+			span{
+				margin-left: 10px;
+				line-height: 30px;
+				position: relative;
+				z-index: 2;
+			}
+		</style>
+	</head>
+	<script src="startMove.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		window.onload = function (){
+			var box  = document.getElementById('box');
+			var div = document.getElementsByTagName('div')[0];
+			var aSpan = box.getElementsByTagName('span');
+			var width = css(box,"width")
+			var num = 0
+			var timer = 1;
+			var target = -100;
+			document.onclick = function (){
+				startMove(div,'width',900,width,"easeOut")	
+				timer =setInterval (function (){
+					fn1(num)
+					num++;
+					if(num== aSpan.length){
+						clearInterval(timer)
+					}
+				},100)
+			}
+			function fn1(index){
+				startMove(aSpan[index],"top",600,target,"linear",null,function (){
+					var nowTop = css(aSpan[index],"top");
+//					console.log(1-nowTop/target)
+					var opacity = 1-nowTop/target;
+					aSpan[index].style.opacity = opacity;
+				})
+			}
+		}
+	</script>
+	<body>
+		<section id="box">
+			<div class="active">
+				
+			</div>
+			<span>+1</span>
+			<span>+1</span>
+			<span>+1</span>
+			<span>+1</span>
+			<span>+1</span>
+			<span>+1</span>
+			<span>+1</span>
+			<span>+1</span>
+			<span>+1</span>
+			<span>+1</span>
+			<span>+1</span>
+			<span>+1</span>
+			<span>+1</span>
+			<span>+1</span>
+		</section>
+	</body>
+</html>
